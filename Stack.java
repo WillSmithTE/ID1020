@@ -11,12 +11,9 @@ public class Stack<U> {
   System.out.println("Enter word: ");
   Scanner scanner = new Scanner(System.in);
   Stack stack = new Stack(200);
-  int c = 0;
-  while (c != 13) {
-   c = scanner.nextInt();
-   stack.push(c);
-   System.out.println(c);
-  } 
+  String c = scanner.next();
+  stack.push(c);
+  System.out.println(c);
   while (!stack.isEmpty()) {
     System.out.println(stack.pop());
   }
