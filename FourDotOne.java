@@ -1,4 +1,4 @@
-import java.util.*;
+import java.io.*;
 
 public class FourDotOne {
  
@@ -6,19 +6,30 @@ public class FourDotOne {
    doTheThings(); 
  }
 
+ private static String fileToRead = "98-0.txt";
+ private static String fileToWrite = "Alpha 98-0.txt";
+
  private static void doTheThings() {
-   String[] input = readArr();
+  try {
+   FileReader reader = new FileReader(fileToRead);
+   FileWriter writer = new FileWriter(fileToWrite);
    boolean[] okChars = makeOkChars();
-   for (int i = 0 ; i < input.length ; i++) {
-     if (!okChars[(int) input[i].charAt(0)]) {
-       input[i] = " ";
+   int character;
+   while ((character = reader.read()) != -1) {
+     System.out.println((char) character);
+     System.out.println(character);
+     if (!okChars[character]) {
+       character = 32;
      }
+     writer.write(character);
    }
-   printArr(input); 
+  } catch (IOException err) {
+   System.out.println("something went wrong: " + err.toString());
+  }
  }
 
  private static boolean[] makeOkChars() {
-   boolean[] okChars = new boolean[128];
+   boolean[] okChars = new boolean[137468];
    okChars[10] = true;
    okChars[32] = true;
    for (int i = (int) 'A' ; i <= (int) 'Z' ; i++) {
@@ -29,20 +40,5 @@ public class FourDotOne {
    }
    return okChars;
  }
-
- private static String[] readArr() {
-   Scanner scanner = new Scanner(System.in);
-   System.out.print("enter array size: ");
-   int arrSize = scanner.nextInt(); 
-   System.out.print("enter string to filter: ");
-   scanner.nextLine();
-   return scanner.nextLine().split(""); 
- }
-
- private static void printArr(String[] arr) {
-  for (int i = 0 ; i < arr.length ; i++) {
-    System.out.print(arr[i]);
-  }
-  System.out.println("");
- }
 }
+
